@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+task intTest(type: Test, dependsOn: test) {
+    testLogging.showStandardStreams = true
+    include "**/*IT*", "**/*IntTest*"
+}
+
+task printCapitalOfUkraine {
+    print x;
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+check.dependsOn.add('intTest')
+
+test {
+    testLogging.showStandardStreams = true
+    exclude "**/*IT*", "**/*IntTest*", "**/*Func*"
+}
